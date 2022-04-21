@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Register | Bus Booking System</title>
+    <title>Register | UrbanWaste-MS</title>
     <meta
       name="description"
       content="Association of Point of Sales Users Membership Registation"
@@ -11,7 +11,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="icon" href="img/logo.jpg" type="image/gif" sizes="16x16" />
+    <link rel="icon" href="img/logo.png" type="image/gif" sizes="16x16" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link
       rel="stylesheet"
@@ -23,66 +23,12 @@
 
   <body class="d-flex flex-column min-vh-100 bg-light">
     <!-- Nav-->
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark text-white">
-      <div class="container">
-        <h1 class="mb-0 h5 py-1 mr-3">
-          <a class="navbar-brand" href="index.html">
-            <img
-              src="img/logo.jpg"
-              width="30"
-              height="30"
-              class="d-inline-block align-top"
-              alt=""
-            />
-            BusBookingSys</a
-          >
-        </h1>
-        <a
-          href="register.html"
-          class="btn btn-outline-light py-1 ml-auto mx-sm-0 order-0 order-sm-last active"
-        >
-          Register Now
-        </a>
-        <button
-          class="navbar-toggler ml-3"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="profile.html">My Profile</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="systemconfig.html"> System Config </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="reserveSeat.html">Reserve a Seat</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="bookedSeat.html">Booked History </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact Us</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <?php include("include/full-header.php"); ?>
 
     <!-- content -->
     <div class="container flex-grow-1 flex-shrink-0 py-5">
       <div class="mb-5 p-4 bg-white shadow-sm">
-        <p>Already have an account? <a href="login.html">Sign in</a></p>
+        <p>Already have an account? <a href="login.php">Sign in</a></p>
         <hr />
         <h3>Create an account</h3>
         <form class="needs-validation m-4" novalidate>
@@ -106,18 +52,18 @@
 
             <div class="form-group col-md-6">
               <label for="inputMailForm"
-                >Registation number
+                >UserName
                 <span class="text-danger font-weight-bold">*</span></label
               >
               <input
                 id="inputMailForm"
                 type="text"
                 class="form-control"
-                placeholder="Enter your registation number"
+                placeholder="Enter your UserName"
                 required
               />
               <div class="invalid-feedback">
-                Please fill the registation number field
+                Please fill the UserName field
               </div>
             </div>
 
@@ -193,16 +139,8 @@
     </div>
 
     <!-- footer -->
-    <footer class="p-3 mt-auto bg-white shadow">
-      <div class="container">
-        <p class="text-muted float-left">
-          <b>Supervisor</b>: Dr. Mal. Abbas Yusuf
-        </p>
-        <p class="float-right">
-          <b>Developed by</b>: Bashir Abdulwahab - KPT/CST/19/46763
-        </p>
-      </div>
-    </footer>
+    <?php include("include/footer.php"); ?>
+
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="js/jquery-3.3.1.slim.min.js"></script>
     <script src="js/popper.min.js"></script>
