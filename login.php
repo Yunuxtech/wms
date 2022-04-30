@@ -28,12 +28,19 @@
     <!-- content -->
     <div class="container flex-grow-1 flex-shrink-0 py-5">
       <div class="mb-5 p-4 bg-white shadow-sm">
+      <?php
+           session_start();
+           if(isset($_SESSION["msg"])){
+             echo $_SESSION["msg"];
+           }
+           unset($_SESSION["msg"]);
+        ?>
         <p>
           New to this website? <a href="register.php">Create an account</a>
         </p>
         <hr />
         <h3>Sign in to your account</h3>
-        <form class="needs-validation m-4" novalidate>
+        <form class="needs-validation m-4" method="post" action="helper/login.php" novalidate>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputMailForm"
@@ -46,6 +53,7 @@
                 class="form-control"
                 placeholder="Enter your email or phone number"
                 required
+                name = "email"
               />
               <div class="invalid-feedback">
                 Please fill the email or phone number field
@@ -62,6 +70,7 @@
                 class="form-control"
                 placeholder="Enter your password"
                 required
+                name = "pass"
               />
               <div class="invalid-feedback">Please fill the password field</div>
               <button
@@ -75,7 +84,14 @@
               </button>
             </div>
           </div>
-          <button class="btn btn-primary" type="submit">Sign in</button>
+          <input
+                
+                type="submit"
+                class="btn btn-primary"
+                value = "Sign in"
+                name = "signin"
+              />
+          <!-- <button class="btn btn-primary" type="submit">Sign in</button> -->
         </form>
 
         <div class="collapse" id="resetPassword">

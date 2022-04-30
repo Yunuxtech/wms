@@ -1,3 +1,7 @@
+<?php 
+include("helper/login.php");
+error_reporting(0);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,35 +22,8 @@
 
 <body class="d-flex flex-column min-vh-100 bg-light">
     <!-- Nav-->
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark text-white">
-        <div class="container">
-            <h1 class="mb-0 h5 py-1 mr-3">
-                <a class="navbar-brand" href="index.html">
-                    <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="" /> UrbanWaste-MS
-                </a>
-            </h1>
-            <a href="register.php" class="btn btn-outline-light py-1 ml-auto mx-sm-0 order-0 order-sm-last">
-          Register Now
-        </a>
-            <button class="navbar-toggler ml-3" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#services"> Services </a>
-                    </li>
-                    <?php include("include/header.php") ?>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    
+    <?php include("include/full-header.php");?>
 
     <!-- content -->
     <div class="container flex-grow-1 flex-shrink-0 py-5">
@@ -66,6 +43,13 @@
                 </ol>
             </div>
         </div> -->
+        <?php
+           session_start();
+           if(isset($_SESSION["msg"])){
+             echo $_SESSION["msg"];
+           }
+           unset($_SESSION["msg"]);
+        ?>
         <?php  include("include/slider.php");?>
         <!-- section for about -->
         <?php  include("include/main-content.php");?>

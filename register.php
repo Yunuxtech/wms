@@ -28,10 +28,17 @@
     <!-- content -->
     <div class="container flex-grow-1 flex-shrink-0 py-5">
       <div class="mb-5 p-4 bg-white shadow-sm">
+      <?php
+           session_start();
+           if(isset($_SESSION["msg"])){
+             echo $_SESSION["msg"];
+           }
+           unset($_SESSION["msg"]);
+        ?>
         <p>Already have an account? <a href="login.php">Sign in</a></p>
         <hr />
         <h3>Create an account</h3>
-        <form class="needs-validation m-4" novalidate>
+        <form class="needs-validation m-4" method="post" action="helper/signup.php" novalidate>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputMailForm"
@@ -44,6 +51,7 @@
                 class="form-control"
                 placeholder="Enter your full name"
                 required
+                name ="name"
               />
               <div class="invalid-feedback">
                 Please fill the full name field
@@ -61,6 +69,7 @@
                 class="form-control"
                 placeholder="Enter your UserName"
                 required
+                name="username"
               />
               <div class="invalid-feedback">
                 Please fill the UserName field
@@ -78,6 +87,7 @@
                 class="form-control"
                 placeholder="Enter email address"
                 required
+                name = "email"
               />
               <div class="invalid-feedback">
                 Please fill the email address field
@@ -95,6 +105,7 @@
                 placeholder="Enter phone number"
                 maxlength="11"
                 required
+                name = "phone"
               />
               <div class="invalid-feedback">
                 Please fill the phone number field
@@ -112,6 +123,7 @@
                 class="form-control"
                 placeholder="Password"
                 required
+                name = "pass"
               />
               <div class="invalid-feedback">Please fill the password field</div>
             </div>
@@ -125,15 +137,23 @@
                 id="inputMailForm"
                 type="password"
                 class="form-control"
-                placeholder="Enter firstname"
+                placeholder="Enter confirm password"
                 required
+                name = "conPass"
               />
               <div class="invalid-feedback">
                 Please fill the cofirm password field
               </div>
             </div>
           </div>
-          <button class="btn btn-primary" type="submit">Sign up</button>
+          <input
+                
+                type="submit"
+                class="btn btn-primary"
+                value = "Sign up"
+                name = "signup"
+              />
+          <!-- <button class="btn btn-primary" type="submit">Sign up</button> -->
         </form>
       </div>
     </div>

@@ -1,3 +1,9 @@
+<?php 
+include("helper/login.php");
+include("function/check-login.php");
+check_login();
+error_reporting(0);
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

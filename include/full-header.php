@@ -5,9 +5,17 @@
                 <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="" /> UrbanWaste-MS
             </a>
         </h1>
-        <a href="register.php" class="btn btn-outline-light py-1 ml-auto mx-sm-0 order-0 order-sm-last">
-          Register Now
-        </a>
+        <?php
+         if(!(isset($_SESSION["login"]))){
+             ?>
+             <a href="register.php" class="btn btn-outline-light py-1 ml-auto mx-sm-0 order-0 order-sm-last">
+                Register Now
+            </a>
+            <?php
+
+        }
+        ?>
+        
         <button class="navbar-toggler ml-3" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,25 +30,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.php#services"> Services </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./disposal-request.php">Disposal Request</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./disposal-history.php">Disposal History </a>
-                </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a>
-                </li> -->
-                <li class="dropdown nav-item">
-                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">
-                        My Profile
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu bg-dark text-white">
-                        <li class="nav-item"><a href="profile.php" class="nav-link">My Profile</a></li>
-                        <li class="nav-item"><a href="contact.php" class="nav-link">Comments</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Logout</a></li>
-                    </ul>
-                </li>
+                <?php 
+                if(isset($_SESSION["login"])){ 
+                    include("include/sub-header.php");
+                } 
+              
+            ?>
+                
             </ul>
         </div>
     </div>

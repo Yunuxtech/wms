@@ -1,3 +1,9 @@
+<?php 
+include("helper/login.php");
+include("function/check-login.php");
+check_login();
+error_reporting(0);
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,11 +32,18 @@
    <?php include("include/full-header.php") ?>
     <!-- content -->
     <div class="container flex-grow-1 flex-shrink-0 py-5">
+      <?php
+           session_start();
+           if(isset($_SESSION["msg"])){
+             echo $_SESSION["msg"];
+           }
+           unset($_SESSION["msg"]);
+        ?>
       <div class="mb-5 p-4 bg-white shadow-sm">
         <h3>Disposal Request</h3>
 
         <div class="card-body">
-        <form class="needs-validation m-4" novalidate action="./helper/seatReservation.php" method="post">
+        <form class="needs-validation m-4" novalidate action="./helper/request.php" method="post">
           <div class="form-row">
             <div class="form-group col-md-12">
               <label for="inputMailForm"
@@ -45,8 +58,9 @@
                     <input
                     type="date"
                     class="form-control"
-                    placeholder="Enter House Address"
+                    placeholder="Enter Date"
                     required
+                    name="date"
                     />
                 <div class="input-group-prepend">
                   <span class="input-group-text">Time</span>
@@ -56,6 +70,7 @@
                         class="form-control"
                         placeholder="Enter House Address"
                         required
+                        name = "time"
                     />
 
                 <div class="invalid-feedback">
@@ -86,7 +101,8 @@
                         type="number"
                         class="form-control"
                         value="<?php echo rand(1111,9999);?>"
-                        disabled
+                        readonly
+                        name="code"
                     />
                 
                 <div class="invalid-feedback">
@@ -104,6 +120,7 @@
                         class="form-control"
                         placeholder="Enter Code"
                         required
+                        name= "comcode"
                     />
                 
                 <div class="invalid-feedback">
@@ -118,7 +135,7 @@
                   <span class="text-danger font-weight-bold">*</span>
                   </label
                 >
-               <textarea name="" id=""  rows="2" class="form-control"></textarea>
+               <textarea name="comment" id=""  rows="2" class="form-control"></textarea>
             </div>
                         
 
@@ -137,9 +154,13 @@
                 <!-- <p class="text-muted font-weight-bold mb-0">Fee:  ₦50.00 </p> -->
             </div>
             <div class="input-group">
-              <button type="submit" class="btn btn-primary">
-                Request Disposal
-              </button>
+            <input
+                
+                type="submit"
+                class="btn btn-primary"
+                value = "Request Disposal"
+                name = "requestDispose"
+              />
             </div>
           </div>
         

@@ -1,0 +1,26 @@
+<li class="nav-item">
+        <a class="nav-link" href="./disposal-request.php">Disposal Request</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="./disposal-history.php">Disposal History </a>
+</li>
+
+<li class="dropdown nav-item">
+    <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">
+        My Profile
+        <span class="caret"></span></a>
+    <ul class="dropdown-menu bg-dark text-white">
+        <?php
+        include_once("dbConnection/connector.php");
+        $id = $_SESSION["login"];
+
+        $sql = "SELECT * FROM `user` WHERE id = '$id'";
+        $result = mysqli_query($conn,$sql); 
+        $row = mysqli_fetch_assoc($result);
+
+        ?>
+        <li class="nav-item"><a href="profile.php" class="nav-link"><?php echo $row["userName"];?></a></li>
+        <li class="nav-item"><a href="contact.php" class="nav-link">Comments</a></li>
+        <li class="nav-item"><a href="function/logout.php" class="nav-link">Logout</a></li>
+    </ul>
+</li>

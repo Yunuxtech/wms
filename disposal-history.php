@@ -1,3 +1,9 @@
+<?php 
+include("helper/login.php");
+include("function/check-login.php");
+check_login();
+error_reporting(0);
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -40,20 +46,34 @@
                     <th scope="col">Request ID</th>
                     <th scope="col">Date</th>
                     <th scope="col">Time</th>
+                    <th scope="col">Day</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Receipt</th>
+                    
 
                   </tr>
                 </thead>
-
-                    <tr>
-                        <td scope="row">1</td>
-                        <td>846482479BC</td>
-                        <td>2/4/2020</td>
-                        <td>2:30pm</td>
-                        <td>Approved</td>
+                <?php
+                $id = $_SESSION["login"];
+                $result = mysqli_query($conn,"SELECT * FROM `request` WHERE user_ID = '$id'");
+                $count = 1;
+                while($row = mysqli_fetch_assoc($result)){
+                  ?>
+                      <tr>
+                        <td scope="row"><?php echo $count; ?></td>
+                        <td><?php echo $row["request_ID"]; ?></td>
+                        <td><?php echo $row["date"]; ?></td>
+                        <td><?php echo $row["time"]; ?></td>
+                        <td><?php echo $row["day"]; ?></td>
                         <td>&#129297;</td>
                     </tr>
+
+                  <?php
+                  $count++;
+                }
+                
+
+
+                ?>
 
                 <tbody>
           </table>
