@@ -19,7 +19,7 @@ if(isset($_POST["requestDispose"])){
   $request_ID = strtoupper(uniqid());
   $user_ID = $_SESSION["login"];
   if($code == $comcode){
-      $result = mysqli_query($conn,"INSERT INTO `request`(`user_ID`, `request_ID`, `date`, `time`, `day`, `comment`) VALUES ('$user_ID','$request_ID','$date','$time','$day','$comment')");
+      $result = mysqli_query($conn,"INSERT INTO `request`(`user_ID`, `request_ID`, `date`, `time`, `day`, `comment`,`status`) VALUES ('$user_ID','$request_ID','$date','$time','$day','$comment',0)");
       if($result){
         $_SESSION["msg"] = '<div class= "alert alert-success">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -49,6 +49,29 @@ if(isset($_POST["requestDispose"])){
 
 }else{
     header("location:../disposal-request.php");
+
+}
+
+if($_GET["id"]!= ""){
+  $id = $_GET["id"];
+  $res = mysqli_query($conn,"UPDATE `request` SET `status`= '2' WHERE id = '$id'");
+  if($res){
+    $_SESSION["msg"] = '<div class= "alert alert-success">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Request Canceled</strong>
+          </div>';
+          header("location:../disposal-history.php");
+
+
+  }else{
+    $_SESSION["msg"] = '<div class= "alert alert-info">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Oooops</strong>
+          </div>';
+          header("location:../disposal-history.php");
+
+        
+  }
 
 }
 

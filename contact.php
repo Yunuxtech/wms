@@ -33,20 +33,104 @@ error_reporting(0);
 
     <!-- content -->
     <div class="container flex-grow-1 flex-shrink-0 py-5">
+    <?php
+           session_start();
+           if(isset($_SESSION["msg"])){
+             echo $_SESSION["msg"];
+           }
+           unset($_SESSION["msg"]);
+        ?>
       <div class="mb-5 p-4 bg-white shadow-sm">
+
         <h3>Contact Us Form</h3>
 
         <div class="card-body">
-          <ol>
-            <li class="mb-3">
-              jnjsnjsnjcsxcnsnnsjnxns
-              <ol type="a">
-                <li>JNsjnjsncsjnxjsjxsn.</li>
-                <li>jndcjdncjndjcdn.</li>
-              </ol>
-            </li>
-            <li class="mb-3">jcdnjdncjdnjncnc</li>
-          </ol>
+        <form class="needs-validation m-4" novalidate action="./helper/contact.php" method="post">
+          <div class="form-row">
+
+            <div class="form-group col-md-6">
+              <label for="inputMailForm"
+                >Email
+                <span class="text-danger font-weight-bold">*</span></label
+              >
+              <?php
+
+              $user_ID = $_SESSION["login"];
+              $result = mysqli_query($conn,"SELECT * FROM `user` WHERE id = '$user_ID'");
+              $row = mysqli_fetch_assoc($result);
+
+
+              ?>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter Email"
+                readonly
+                value="<?php  echo $row["email"]; ?>"
+                name="email"
+                
+                    />
+             
+              <div class="invalid-feedback">
+                Please enter the email field
+              </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="inputMailForm"
+                  >Subject
+                  <span class="text-danger font-weight-bold"></span></label
+                >
+                <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Message Subject"
+                        required
+                        name="subject"
+                    />
+                
+                <div class="invalid-feedback">
+                  Please fill the Message Subject
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="inputMailForm"
+                  >Message
+                  <span class="text-danger font-weight-bold">*</span></label
+                >
+                <textarea name="msg" id=""  rows="2" class="form-control">Enter your message here</textarea>
+                <div class="invalid-feedback">
+                  Please fill the Message  field
+                </div>
+            </div>
+            
+          </div>
+          <hr />
+        
+          <div
+            class="btn-toolbar justify-content-between"
+            role="toolbar"
+            aria-label="Toolbar with button groups"
+          >
+         
+            <div class="btn-group" role="group" aria-label="First group">
+                <!-- <p class="text-muted font-weight-bold mb-0">Fee:  ₦50.00 </p> -->
+            </div>
+            <div class="input-group">
+            <input
+                
+                type="submit"
+                class="btn btn-primary"
+                value = "Send Message"
+                name="sendMsg"
+                
+              />
+            </div>
+          </div>
+        
+        
+        </form>
         </div>
       </div>
     </div>

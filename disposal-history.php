@@ -1,8 +1,10 @@
 <?php 
 include("helper/login.php");
 include("function/check-login.php");
+
 check_login();
 error_reporting(0);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,6 +34,13 @@ error_reporting(0);
    <?php include("include/full-header.php") ?>
     <!-- content -->
     <div class="container flex-grow-1 flex-shrink-0 py-5">
+    <?php
+           session_start();
+           if(isset($_SESSION["msg"])){
+             echo $_SESSION["msg"];
+           }
+           unset($_SESSION["msg"]);
+        ?>
       <div class="mb-5 p-4 bg-white shadow-sm">
         <h3>Disposal History</h3>
 
@@ -48,6 +57,7 @@ error_reporting(0);
                     <th scope="col">Time</th>
                     <th scope="col">Day</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Action</th>
                     
 
                   </tr>
@@ -64,14 +74,50 @@ error_reporting(0);
                         <td><?php echo $row["date"]; ?></td>
                         <td><?php echo $row["time"]; ?></td>
                         <td><?php echo $row["day"]; ?></td>
-                        <td>&#129297;</td>
+                        <td>
+                          <?php
+                          if($row["status"] == 0){
+                            echo "Pending Request";
+                          }
+                          if($row["status"] == 2){
+                            echo "Canceled";
+                          }
+                          if($row["status"] == 1){
+                            echo "Approved";
+                          }
+                          
+
+                          ?>
+                        </td>
+                        <td> 
+                          <?php
+                          if($row["status"] == 1){
+                            ?>
+                            <i class="fa fa-thumbs-up"></i>
+                            <?php
+
+                          }
+                          if($row["status"] == 2){
+                            ?>
+                               <i class="fa fa-ban"></i> 
+                            <?php
+
+                          }
+                          if($row["status"] == 0){
+                            ?>
+                               <a href="./helper/request.php?id=<?php echo $row["id"]; ?>"><i class="fa fa-bell" style="color:#343a40;"></i> </a>
+                            <?php
+                          }
+
+
+                          ?>
+                         
+                        </td>
                     </tr>
 
                   <?php
                   $count++;
                 }
-                
-
 
                 ?>
 

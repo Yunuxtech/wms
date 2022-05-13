@@ -19,8 +19,8 @@
         $row = mysqli_fetch_assoc($result);
 
         ?>
-        <li class="nav-item"><a href="profile.php" class="nav-link"><?php echo $row["userName"];?></a></li>
-        <li class="nav-item"><a href="contact.php" class="nav-link">Comments</a></li>
-        <li class="nav-item"><a href="function/logout.php" class="nav-link">Logout</a></li>
+        <li class="nav-item"><a href="profile.php" class="nav-link"><i class="fa fa-user"></i> <?php echo $row["userName"];?> </a></li>
+        <li class="nav-item"><a href="contact.php" class="nav-link"><i class="fa fa-comment"></i> Comments</a></li>
+        <li class="nav-item"><a href="function/logout.php" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
     </ul>
 </li>
