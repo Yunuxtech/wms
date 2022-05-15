@@ -93,19 +93,19 @@ error_reporting(0);
                           <?php
                           if($row["status"] == 1){
                             ?>
-                            <i class="fa fa-thumbs-up"></i>
+                            <i class="fa fa-thumbs-up" title="Approved Request"></i>
                             <?php
 
                           }
                           if($row["status"] == 2){
                             ?>
-                               <i class="fa fa-ban"></i> 
+                               <i class="fa fa-ban" title="Canceled Request"></i> 
                             <?php
 
                           }
                           if($row["status"] == 0){
                             ?>
-                               <a href="./helper/request.php?id=<?php echo $row["id"]; ?>"><i class="fa fa-bell" style="color:#343a40;"></i> </a>
+                               <a href="./helper/request.php?id=<?php echo $row["id"]; ?>"><i class="fa fa-bell" style="color:#343a40;" title="Pending Request"></i> </a>
                             <?php
                           }
 

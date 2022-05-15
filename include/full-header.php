@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark text-white">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
     <div class="container">
         <h1 class="mb-0 h5 py-1 mr-3">
             <a class="navbar-brand" href="index.html">
