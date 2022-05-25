@@ -277,10 +277,10 @@ error_reporting(0);
 
 
 <!-- Modal -->
-<div id="MyForm" class="modal fade" role="dialog">
+<!-- <div id="MyForm" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
-      <!-- Modal content-->
+      
       <div class="modal-content">
         <div class="modal-header">
         <h4 class="modal-title">Request details</h4>
@@ -296,8 +296,23 @@ error_reporting(0);
       </div>
 
     </div>
-</div>
+</div> -->
 
+<div class="modal fade" id="MyForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Request details</h5>
+        <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body" id="details">...</div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
     <!-- footer -->
     
 <?php include("include/footer.php"); ?>
@@ -332,6 +347,7 @@ error_reporting(0);
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <!-- MDB -->
+    
 <script
   type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"
