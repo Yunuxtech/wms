@@ -16,7 +16,9 @@ if(isset($_POST["signin"])){
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             <strong>Login Successsful</strong>
         </div>';
+        
         $_SESSION['login'] = $row["id"];
+        $_SESSION['status'] = $row["status"];
         header("location:../index.php");
 
     }else{

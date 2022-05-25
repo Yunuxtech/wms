@@ -1,9 +1,31 @@
-<li class="nav-item">
-        <a class="nav-link" href="./disposal-request.php">Disposal Request</a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="./disposal-history.php">Disposal History </a>
-</li>
+<?php
+if($_SESSION["status"] !=1){
+    ?>
+        <li class="nav-item">
+                <a class="nav-link" href="./disposal-request.php">Disposal Request</a>
+        </li>
+    <?php
+}
+
+?>
+
+<?php
+if($_SESSION["status"] == 1){
+    ?>
+        <li class="nav-item">
+            <a class="nav-link" href="./in-request.php">In-Requset </a>
+        </li>
+    <?php
+}else{
+    ?>
+        <li class="nav-item">
+            <a class="nav-link" href="./disposal-history.php">Disposal History </a>
+        </li>
+    <?php
+}
+
+?>
+
 
 <li class="dropdown nav-item">
     <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">

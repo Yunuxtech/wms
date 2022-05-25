@@ -3,6 +3,7 @@ include("helper/login.php");
 include("function/check-login.php");
 
 check_login();
+check_admin();
 error_reporting(0);
 
 ?>
@@ -10,7 +11,7 @@ error_reporting(0);
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Disposal History | UrbanWaste-MS</title>
+    <title>In-Request | UrbanWaste-MS</title>
     <meta
       name="description"
       content="Association of Point of Sales Users Membership Registation"
@@ -27,6 +28,8 @@ error_reporting(0);
       integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
       crossorigin="anonymous"
     />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
   </head>
 
   <body class="d-flex flex-column min-vh-100 bg-light">
@@ -42,13 +45,13 @@ error_reporting(0);
            unset($_SESSION["msg"]);
         ?>
       <div class="mb-5 p-4 bg-white shadow-sm">
-        <h3>Disposal History</h3>
+        <h3>In-Request</h3>
 
         <div class="card-body">
         
           <!-- Tabs navs -->
 <!-- Tabs navs -->
-<ul class="nav nav-tabs nav-justified mb-3" id="ex1" role="tablist">
+<ul class="nav nav-tabs nav-justified mb-5" id="ex1" role="tablist">
   <li class="nav-item" role="presentation">
     <a
       class="nav-link active"
@@ -58,7 +61,7 @@ error_reporting(0);
       role="tab"
       aria-controls="ex3-tabs-1"
       aria-selected="true"
-      >Approved</a
+      >Pending</a
     >
   </li>
   <li class="nav-item" role="presentation">
@@ -70,7 +73,7 @@ error_reporting(0);
       role="tab"
       aria-controls="ex3-tabs-2"
       aria-selected="false"
-      >Pending</a
+      >Approved</a
     >
   </li>
   <li class="nav-item" role="presentation">
@@ -96,7 +99,8 @@ error_reporting(0);
       role="tabpanel"
       aria-labelledby="ex3-tab-1"
     >
-      <!-- content for approved -->
+    
+      <!-- content for pendding -->
       <table class="table caption-top">
                 <caption>
                   List of Requests
@@ -116,7 +120,10 @@ error_reporting(0);
                 </thead>
                 <?php
                 $id = $_SESSION["login"];
-                $result = mysqli_query($conn,"SELECT * FROM `request` WHERE user_ID = '$id' AND status = '1'");
+                // $result = mysqli_query($conn,"SELECT * FROM `request` WHERE status = '0'");
+                $result = mysqli_query($conn,"SELECT * FROM `request` WHERE status = '0' And DATE(creation_date) = CURDATE()");
+
+
                 $count = 1;
                 while($row = mysqli_fetch_assoc($result)){
                   ?>
@@ -127,10 +134,14 @@ error_reporting(0);
                         <td><?php echo $row["time"]; ?></td>
                         <td><?php echo $row["day"]; ?></td>
                         <td>
-                          <?php echo "Approved";?>
+                          <?php echo "Pending";?>
                         </td>
                         <td> 
-                            <i class="fa fa-thumbs-up" title="Approved Request"></i>
+                            <a href="./helper/in-request.php?approve_id=<?php echo $row["id"]; ?>"><i class="fa fa-thumbs-up" title="Approved Request" style="color:#343a40;"></i> </a> || 
+                            <!-- <a href="./helper/in-request.php?view_id=<?php echo $row["id"]; ?>"><i class="fa fa-eye" title="View Request" style="color:#343a40;"></i> </a> ||  -->
+                            <i class="fa fa-eye viewdata" title="View Request" style="cursor:pointer;" id="<?php echo $row['id']; ?>"></i>|| 
+
+                            <a href="./helper/in-request.php?disapprove_id=<?php echo $row["id"]; ?>"><i class="fa fa-bell" title="Disapprove" style="color:#343a40;"></i> </a>
                         </td>
                     </tr>
 
@@ -150,7 +161,7 @@ error_reporting(0);
       role="tabpanel"
       aria-labelledby="ex3-tab-2"
     >
-      <!-- content for pending -->
+      <!-- content for approved -->
 
       <table class="table caption-top">
                 <caption>
@@ -171,7 +182,9 @@ error_reporting(0);
                 </thead>
                 <?php
                 $id = $_SESSION["login"];
-                $result = mysqli_query($conn,"SELECT * FROM `request` WHERE user_ID = '$id' AND status = '0'");
+                // $result = mysqli_query($conn,"SELECT * FROM `request` WHERE status = '1'");
+                $result = mysqli_query($conn,"SELECT * FROM `request` WHERE status = '1' And DATE(creation_date) = CURDATE()");
+
                 $count = 1;
                 while($row = mysqli_fetch_assoc($result)){
                   ?>
@@ -182,10 +195,10 @@ error_reporting(0);
                         <td><?php echo $row["time"]; ?></td>
                         <td><?php echo $row["day"]; ?></td>
                         <td>
-                          <?php echo "Pending Request";?>
+                          <?php echo "Approved Request";?>
                         </td>
                         <td> 
-                          <a href="./helper/request.php?id=<?php echo $row["id"]; ?>"><i class="fa fa-bell" style="color:#343a40;" title="Pending Request"></i> </a>
+                          <i class="fa fa-thumbs-up" style="color:#343a40;" title="Approved Request"></i>
                         </td>
                     </tr>
 
@@ -225,7 +238,9 @@ error_reporting(0);
                 </thead>
                 <?php
                 $id = $_SESSION["login"];
-                $result = mysqli_query($conn,"SELECT * FROM `request` WHERE user_ID = '$id' AND status = '2'");
+                // $result = mysqli_query($conn,"SELECT * FROM `request` WHERE status = '2'");
+                $result = mysqli_query($conn,"SELECT * FROM `request` WHERE status = '2' And DATE(creation_date) = CURDATE()");
+
                 $count = 1;
                 while($row = mysqli_fetch_assoc($result)){
                   ?>
@@ -240,7 +255,6 @@ error_reporting(0);
                         </td>
                         <td> 
                            <i class="fa fa-ban" title="Canceled Request"></i> 
-
                         </td>
                     </tr>
 
@@ -260,13 +274,63 @@ error_reporting(0);
       </div>
     </div>
 
+
+
+<!-- Modal -->
+<div id="MyForm" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+        <h4 class="modal-title">Request details</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body" id="details">
+          <p>hey</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+</div>
+
     <!-- footer -->
-    <?php include("include/footer.php"); ?>
+    
+<?php include("include/footer.php"); ?>
+<!-- handling view of request -->
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.viewdata').click(function(){
+      var UserID = $(this).attr("id");
+
+      $.ajax({
+        url:"./helper/in-request.php",
+        method:"post",
+        data:{UserID:UserID},
+        success:function(data){
+          $('#details').html(data);
+          $('#MyForm').modal('show');
+        }
+         
+      });
+      
+      
+    });
+  });
+</script>
+<!-- end of view request -->
+
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="js/jquery-3.3.1.slim.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/custom.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
     <!-- MDB -->
 <script
   type="text/javascript"
